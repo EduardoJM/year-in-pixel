@@ -96,7 +96,9 @@
     </div>
 
     <!-- JavaScript -->
-    <script type="text/javascript" src="../core/SettingsManager.js"></script>
-    <script type="text/javascript" src="../core/screens/year.js"></script>
+    <script type="text/javascript">
+        const yearPageLoaded = require('../core/screens/year.js');
+        document.addEventListener('DOMContentLoaded', yearPageLoaded);
+    </script>
 </body>
 </html>

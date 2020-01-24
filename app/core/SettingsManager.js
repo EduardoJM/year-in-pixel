@@ -1,15 +1,18 @@
-const remote = require('electron').remote;
-const app = remote.app;
-const fs = require("fs");
+const { remote } = require('electron');
+const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
-const path = require("path");
+const path = require('path');
+
+const { app } = remote;
 
 class SettingsManager {
-    constructor(autoinit){
-        this.listener = [];
-        this.listener["updateColorLevels"] = [];
+    constructor(autoinit) {
+        this.listener = {
+            updateColorLevels: [],
+        };
+        // this.listener['updateColorLevels'] = [];
         this.db = null;
-        if(autoinit){
+        if (autoinit) {
             this.initialize();
         }
     }
@@ -17,23 +20,22 @@ class SettingsManager {
     initialize() {
         this.defaults = {
             colors: [
-                "#4527a0",
-                "#ec407a",
-                "#f44336",
-                "#f57c00",
-                "#ffd740",
-                "#00c853",
-                "#0277bd"
-            ]
+                '#4527a0',
+                '#ec407a',
+                '#f44336',
+                '#f57c00',
+                '#ffd740',
+                '#00c853',
+                '#0277bd',
+            ],
         };
         this.colors = null;
         // load sqlite
         const dataPath = app.getPath('userData');
         if (fs.existsSync(dataPath)) {
             const dbpath = path.join(dataPath, 'user.db');
-            this.db = new sqlite3.Database(dbpath, err => {
-                if(err){
-                    console.error(err);
+            this.db = new sqlite3.Database(dbpath, (err) => {
+                if (err) {
                     this.db = null;
                 }
                 this.db.run('PRAGMA synchronous=OFF');
@@ -44,70 +46,67 @@ class SettingsManager {
             });
         }
         // raise event listener to update color levels
-        this.executeListener("updateColorLevels");
+        this.executeListener('updateColorLevels');
     }
 
-    executeListener(name){
-        if(this.listener.hasOwnProperty(name) && this.listener[name].length > 0){
-            this.listener[name].forEach(element => {
+    executeListener(name) {
+        if (Object.prototype.hasOwnProperty.call(this.listener, name)
+            && this.listener[name].length > 0) {
+            this.listener[name].forEach((element) => {
                 element();
             });
-        };
+        }
     }
 
-    loadDatabaseUserInfo(){
-        if(this.db === null || this.db === undefined){
+    loadDatabaseUserInfo() {
+        if (this.db === null || this.db === undefined) {
             return;
         }
-        const query = "SELECT * FROM colors";
+        const query = 'SELECT * FROM colors';
         this.db.all(query, (err, rows) => {
-            if(err){
-                console.error(err);
+            if (err) {
+                // console.error(err);
                 return;
             }
             this.colors = [];
-            for(let i = 0; i < rows.length; i++){
+            for (let i = 0; i < rows.length; i += 1) {
                 this.colors[rows[i].id] = rows[i].color;
             }
-            this.executeListener("updateColorLevels");
+            this.executeListener('updateColorLevels');
         });
     }
 
-    saveDatabaseUserInfo(){
-        if(this.db === null || this.db === undefined){
+    saveDatabaseUserInfo() {
+        if (this.db === null || this.db === undefined) {
             return;
         }
-        const query = "CREATE TABLE IF NOT EXISTS colors (id INT PRIMARY KEY, color CHAR[100])";
+        const query = 'CREATE TABLE IF NOT EXISTS colors (id INT PRIMARY KEY, color CHAR[100])';
         this.db.run(query, (err) => {
-            if(err){
-                console.error(err);
+            if (err) {
                 return;
             }
-            if(this.colors === null || this.colors === undefined){
+            if (this.colors === null || this.colors === undefined) {
                 this.colors = this.defaults.colors;
             }
-            const stmt = this.db.prepare("INSERT OR REPLACE INTO colors VALUES (?, ?)");
-            for(let i = 0; i < this.colors.length; i++){
+            const stmt = this.db.prepare('INSERT OR REPLACE INTO colors VALUES (?, ?)');
+            for (let i = 0; i < this.colors.length; i += 1) {
                 stmt.run(i, this.colors[i]);
             }
         });
     }
 
     loadDatabasePixels(callback) {
-        if(this.db === null || this.db === undefined){
+        if (this.db === null || this.db === undefined) {
             return;
         }
-        const query = "SELECT * FROM pixels";
+        const query = 'SELECT * FROM pixels';
         this.db.all(query, (err, rows) => {
-            if(err){
-                console.error(err);
+            if (err) {
                 return;
             }
-            console.log(rows.length);
-            let table = [];
-            for(let i = 0; i < rows.length; i++){
-                //console.log(rows[i]);
-                if(!table.hasOwnProperty(rows[i].month)){
+            const table = [];
+            for (let i = 0; i < rows.length; i += 1) {
+                if (!Object.prototype.hasOwnProperty.call(table, rows[i].month)) {
                     table[rows[i].month] = [];
                 }
                 table[rows[i].month][rows[i].day] = rows[i].level;
@@ -116,65 +115,40 @@ class SettingsManager {
         });
     }
 
-    saveDatabasePixels(table){
-        if(this.db === null || this.db === undefined){
+    saveDatabasePixels(table) {
+        if (this.db === null || this.db === undefined) {
             return;
         }
-        this.db.run("DROP TABLE IF EXISTS pixels", (err) => {
-            if(err){
-                console.error(err);
+        this.db.run('DROP TABLE IF EXISTS pixels', (err) => {
+            if (err) {
                 return;
             }
-            const query = "CREATE TABLE pixels (ID INTEGER PRIMARY KEY AUTOINCREMENT, month INTEGER, day INTEGER, level INTEGER)";
-            this.db.run(query, (err) => {
-                if(err){
-                    console.error(err);
+            const query = 'CREATE TABLE pixels (ID INTEGER PRIMARY KEY AUTOINCREMENT, month INTEGER, day INTEGER, level INTEGER)';
+            this.db.run(query, (errCreate) => {
+                if (errCreate) {
                     return;
                 }
-                const stmt = this.db.prepare("INSERT INTO pixels (month, day, level) VALUES (?, ?, ?)");
-                //let num = 0;
-                //let arr = [];
-                //let states = [];
-                for(let i = 0; i < table.length; i++){
-                    //console.log("Month: " + i);
-                    for(let j = 0; j < table[i].length; j++){
-                        //console.log("Day: " + j);
+                const stmt = this.db.prepare('INSERT INTO pixels (month, day, level) VALUES (?, ?, ?)');
+                for (let i = 0; i < table.length; i += 1) {
+                    for (let j = 0; j < table[i].length; j += 1) {
                         const level = table[i][j];
-                        //arr.push([i, j, level]);
-                        //arr.push(i);
-                        //arr.push(j);
-                        //arr.push(level);
-                        //states.push("(?, ?, ?)");
-                        //console.log("Level: " + level);
                         stmt.run(i, j, level);
-                        //const iq = "INSERT INTO pixels (month, day, level) VALUES (?, ?, ?)";
-                        //this.db.run(iq, [i, j, level]);
-                        //num++;
                     }
                 }
-                //const placeholders = states.join(",");
-                //let sql = 'INSERT INTO pixels(month, day, level) VALUES ' + placeholders;
-                /*this.db.run(sql, arr, function(err) {
-                    if (err) {
-                        return console.error(err.message);
-                    }
-                    console.log(`Rows inserted ${this.changes}`);
-                });                  */
                 stmt.finalize();
-                //console.log(num);
             });
         });
     }
 
-    addEventListener(name, event){
-        if(!this.listener.hasOwnProperty(name)){
+    addEventListener(name, event) {
+        if (!Object.prototype.hasOwnProperty.call(this.listener, name)) {
             return;
         }
         this.listener[name].push(event);
     }
 
-    removeEventListener(name, event){
-        if(!this.listener.hasOwnProperty(name)){
+    removeEventListener(name, event) {
+        if (!Object.prototype.hasOwnProperty.call(this.listener, name)) {
             return;
         }
         const index = this.listener[name].indexOf(event);
@@ -182,15 +156,16 @@ class SettingsManager {
     }
 
     getColor(level) {
-        if(level < 0){
-            throw new Error("invalid color level.");
+        let newLevel = level;
+        if (newLevel < 0) {
+            newLevel = 0;
         }
-        if(level > 6){
-            throw new Error("invalid color level.");
+        if (newLevel > 6) {
+            newLevel = 6;
         }
-        let color = this.defaults.colors[level];
-        if(this.colors !== null && this.colors !== undefined && this.colors.length === 7){
-            color = this.colors[level];
+        let color = this.defaults.colors[newLevel];
+        if (this.colors !== null && this.colors !== undefined && this.colors.length === 7) {
+            color = this.colors[newLevel];
         }
         return color;
     }

@@ -1,23 +1,23 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow } = require('electron');
 
 let win;
 
-function createWindow () {
+function createWindow() {
     // Criar uma janela de navegação.
     win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+        },
     });
-  
+
     // and load the index.html of the app.
     win.loadFile('app/screens/year.html');
-  
+
     // Open the DevTools.
     win.webContents.openDevTools();
-  
+
     // Emitido quando a janela é fechada.
     win.on('closed', () => {
         // Elimina a referência do objeto da janela, geralmente você iria armazenar as janelas
@@ -34,12 +34,12 @@ app.on('ready', createWindow);
 
 // Finaliza quando todas as janelas estiverem fechadas.
 app.on('window-all-closed', () => {
-    // No macOS é comum para aplicativos e sua barra de menu 
+    // No macOS é comum para aplicativos e sua barra de menu
     // permaneçam ativo até que o usuário explicitamente encerre com Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit();
     }
-})
+});
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -47,4 +47,4 @@ app.on('activate', () => {
     if (win === null) {
         createWindow();
     }
-})
+});
