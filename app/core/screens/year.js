@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function(){
         for(let i = 0; i < year.length; i++){
             html += '<div class="column"><div class="row heading">' + year[i].name + '</div>';
             for(let j = 0; j < year[i].days; j++){
-                html += '<div class="row" data-day="' + j + '" data-mouth="' + i + '"><div class="color"></div></div>';
+                html += '<div class="row" data-level="-1" data-day="' + j + '" data-mouth="' + i + '"><div class="color"></div></div>';
             }
             if(year[i].days > max){
                 max = year[i].days;
@@ -100,8 +100,50 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     };
 
+    const savePixels = () => {
+        let table = [];
+        for(let i = 0; i < year.length; i++){
+            table[i] = [];
+            for(let j = 0; j < year[i].days; j++){
+                const month = i;
+                const day = j;
+                const query = ".row[data-mouth='" + month + "'][data-day='" + day + "']";
+                const el = document.querySelector(query);
+                let lvl = el.getAttribute("data-level");
+                if(lvl === null || lvl === undefined){
+                    lvl = -1;
+                } else {
+                    lvl = parseInt(lvl);
+                    if(Number.isNaN(lvl)){
+                        lvl = -1;
+                    }
+                }
+                table[month][day] = lvl;
+            }
+        }
+        settings.saveDatabasePixels(table);
+    };
+
     settings.addEventListener('updateColorLevels', updateColorLevels);
     settings.initialize();
+    settings.loadDatabasePixels((table) => {
+        for(let i = 0; i < table.length; i++){
+            for(let j = 0; j < table[i].length; j++){
+                const month = i;
+                const day = j;
+                const level = table[i][j];
+                //console.log(level);
+                const query = ".row[data-mouth='" + month + "'][data-day='" + day + "']";
+                const element = document.querySelector(query);
+                let color = "#FFF";
+                if(level >= 0 && level < 7){
+                    color = settings.getColor(level);
+                }
+                element.querySelector(".color").style.backgroundColor = color;
+                element.setAttribute("data-level", level);
+            }
+        }
+    });
 
     document.querySelector("#selector-dialog #selector-cancel-button").addEventListener('click', function() {
         const dlg = document.getElementById('selector-dialog');
@@ -128,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 return;
             }
             currentChangingCell.style.backgroundColor = settings.getColor(level);
+            currentChangingCell.parentElement.setAttribute('data-level', level);
             toggleColorSelectorDialog();
         });
     });
@@ -173,4 +216,8 @@ document.addEventListener('DOMContentLoaded', function(){
         };
         setTimeout(changeOpacity, interval);
     };
+
+    document.getElementById('save-button').addEventListener("click", () => {
+        savePixels();
+    });
 });

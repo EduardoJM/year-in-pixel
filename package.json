@@ -5,7 +5,8 @@
   "main": "app/main.js",
   "scripts": {
     "sass": "sass --watch app/screens/assets/styles/sass:app/screens/assets/styles/css",
-    "start": "electron ."
+    "start": "electron .",
+    "electron-rebuild-sqlite": "electron-rebuild -w sqlite3 -p"
   },
   "author": "",
   "license": "MIT",
@@ -21,11 +22,15 @@
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
     "electron": "^7.1.10",
+    "electron-rebuild": "^1.9.0",
     "husky": "^4.2.1"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "sqlite3": "^4.1.1"
   }
 }
