@@ -49,6 +49,11 @@ year[11] = {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
+    const settings = new SettingsManager(false);
+    let currentChangingCell = null;
+    let dialogClosing = false;
+    let dialogOpening = false;
+
     const buildTable = () => {
         let html = '';
         let max = -1;
@@ -72,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const colorButtonClick = (e) => {
         const el = e.target;
-        alert("Terminar o código");
-        //el.style.backgroundColor = 'red';
+        currentChangingCell = el;
+        toggleColorSelectorDialog();
     };
 
     const bindEvents = () => {
@@ -84,4 +89,88 @@ document.addEventListener('DOMContentLoaded', function(){
 
     buildTable();
     bindEvents();
+
+    const updateColorLevels = () => {
+        for(let i = 0; i < 7; i++){
+            const cl = '.color-level-' + i.toString();
+            const color = settings.getColor(i);
+            document.querySelectorAll(cl).forEach(element => {
+                element.style.backgroundColor = color;
+            });
+        }
+    };
+
+    settings.addEventListener('updateColorLevels', updateColorLevels);
+    settings.initialize();
+
+    document.querySelector("#selector-dialog #selector-cancel-button").addEventListener('click', function() {
+        const dlg = document.getElementById('selector-dialog');
+        const opened = dlg.style.display === 'flex';
+        if(opened){
+            toggleColorSelectorDialog();
+        }
+    });
+    document.querySelectorAll("#selector-dialog .list-item").forEach(element => {
+        element.addEventListener('click', e => {
+            if(currentChangingCell === null || currentChangingCell === undefined){
+                return;
+            }
+            let target = e.target;
+            while(target !== null && target !== undefined && !target.classList.contains("list-item")){
+                target = target.parentElement;
+            }
+            if(target === null || target === undefined || !target.classList.contains("list-item")){
+                return;
+            }
+            let level = target.getAttribute('data-level');
+            level = parseInt(level);
+            if(Number.isNaN(level)){
+                return;
+            }
+            currentChangingCell.style.backgroundColor = settings.getColor(level);
+            toggleColorSelectorDialog();
+        });
+    });
+
+    const toggleColorSelectorDialog = () => {
+        if(dialogClosing || dialogOpening){
+            return;
+        }
+        const dlg = document.getElementById('selector-dialog');
+        const opened = dlg.style.display === 'flex';
+        dialogClosing = false;
+        dialogOpening = false;
+        if(!opened){
+            dlg.style.display = 'flex';
+            dialogOpening = true;
+        }
+        else {
+            dialogClosing = true;
+        }
+        const time = 200;
+        const count = 10;
+        const interval = time / count;
+        let iteration = 0;
+        const changeOpacity = () => {
+            let opacity = 1 / count * iteration;
+            if(opened){
+                opacity = (1 - opacity);
+            }
+            dlg.style.opacity = opacity;
+            iteration++;
+            if(iteration < count){
+                setTimeout(changeOpacity, interval);
+            } else {
+                if(opened){
+                    dlg.style.opacity = 0;
+                    dlg.style.display = 'none';
+                } else {
+                    dlg.style.opacity = 1;
+                }
+                dialogClosing = false;
+                dialogOpening = false;
+            }
+        };
+        setTimeout(changeOpacity, interval);
+    };
 });
