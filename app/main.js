@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 
 let win;
 
@@ -11,6 +11,7 @@ function createWindow() {
             nodeIntegration: true,
         },
     });
+    Menu.setApplicationMenu(null);
 
     // and load the index.html of the app.
     win.loadFile('app/screens/year.html');
