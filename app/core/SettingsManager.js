@@ -156,16 +156,15 @@ class SettingsManager {
     }
 
     getColor(level) {
-        let newLevel = level;
-        if (newLevel < 0) {
-            newLevel = 0;
+        if (level < 0) {
+            return '#FFF';
         }
-        if (newLevel > 6) {
-            newLevel = 6;
+        if (level > 6) {
+            return '#FFF';
         }
-        let color = this.defaults.colors[newLevel];
+        let color = this.defaults.colors[level];
         if (this.colors !== null && this.colors !== undefined && this.colors.length === 7) {
-            color = this.colors[newLevel];
+            color = this.colors[level];
         }
         return color;
     }
