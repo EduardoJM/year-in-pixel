@@ -99,24 +99,6 @@ body
         }
     }
 
-    .float-button{
-        position: fixed;
-        cursor: pointer;
-
-        .float-button-icon svg{
-            width: 32px;
-            margin: 5px;
-        }
-
-        &.float-top{
-            top: 10px;
-        }
-
-        &.float-left{
-            left: 10px;
-        }
-    }
-
     .float-toolbar{
         position: fixed;
         display: flex;
@@ -126,10 +108,44 @@ body
             width: 100%;
             cursor: pointer;
             margin: 5px 0;
+            position: relative;
 
             .float-toolbar-button-icon {
                 svg{
                     width: 32px;
+                }
+            }
+
+            .float-toolbar-button-tooltip{
+                position: absolute;
+                top: 0;
+                right: 100%;
+                margin-right: 15px;
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background: #222;
+                color: #FFF;
+                border-radius: 10px;
+                padding: 10px;
+                opacity: 0;
+                transition: opacity .3s ease-out;
+                -webkit-transition: opacity .3s ease-out;
+
+                span {
+                    display: inline;
+                    text-align: center;
+                }
+            }
+
+            &:hover {
+                .float-toolbar-button-tooltip{
+                    display: flex;
+                    opacity: 1;
+                    transition: opacity .3s ease-in;
+                    -webkit-transition: opacity .3s ease-in;
                 }
             }
         }
