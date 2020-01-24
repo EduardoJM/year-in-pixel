@@ -48,6 +48,7 @@ year[11] = {
     days: 31,
 };
 
+const { remote } = require('electron');
 const SettingsManager = require('./../SettingsManager');
 
 const yearPageLoaded = () => {
@@ -228,6 +229,10 @@ const yearPageLoaded = () => {
 
     document.getElementById('save-button').addEventListener('click', () => {
         savePixels();
+    });
+    document.getElementById('back-button').addEventListener('click', () => {
+        const window = remote.getCurrentWindow();
+        window.loadFile('app/screens/home.html');
     });
 };
 

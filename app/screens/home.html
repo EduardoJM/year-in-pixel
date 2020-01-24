@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Seu ano em Pixels</title>
+    <link rel="stylesheet" href="assets/styles/css/home.css" />
+</head>
+<body>
+    <div id="main-box">
+        <h1 id="title-box">Seu ano em Pixels</h1>
+        <div id="commands-box">
+            <div id="commands-list">
+                <div class="command" data-command="file-link" data-file="app/screens/year.html">
+                    Meu ano em Pixels
+                </div>
+                <div class="command">
+                    Configurar
+                </div>
+                <div class="command">
+                    Sobre
+                </div>
+                <div class="command">
+                    Sair
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const homePageLoaded = require("../core/screens/home.js");
+        document.addEventListener("DOMContentLoaded", homePageLoaded);
+    </script>
+</body>
+</html>

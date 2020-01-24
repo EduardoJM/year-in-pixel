@@ -14,7 +14,7 @@ function createWindow() {
     Menu.setApplicationMenu(null);
 
     // and load the index.html of the app.
-    win.loadFile('app/screens/year.html');
+    win.loadFile('app/screens/home.html');
 
     // Open the DevTools.
     win.webContents.openDevTools();

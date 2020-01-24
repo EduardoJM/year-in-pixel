@@ -43,6 +43,7 @@ body #main-box h1#title-box {
   font-size: 3em;
   text-align: center;
 }
+
 body #main-box #pixels-box {
   flex: 1;
   overflow: auto;
