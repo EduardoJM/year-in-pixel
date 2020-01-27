@@ -18,6 +18,10 @@ const homePageLoaded = () => {
             }
         });
     });
+    document.querySelector('#exit-button').addEventListener('click', () => {
+        const window = remote.getCurrentWindow();
+        window.close();
+    });
 };
 
 module.exports = homePageLoaded;
