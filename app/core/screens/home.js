@@ -15,12 +15,11 @@ const homePageLoaded = () => {
                 }
                 const window = remote.getCurrentWindow();
                 window.loadFile(url);
+            } else if (commandAction === 'exit') {
+                const window = remote.getCurrentWindow();
+                window.close();
             }
         });
-    });
-    document.querySelector('#exit-button').addEventListener('click', () => {
-        const window = remote.getCurrentWindow();
-        window.close();
     });
 };
 
