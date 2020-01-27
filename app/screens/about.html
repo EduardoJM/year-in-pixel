@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Seu ano em Pixels - Configurações</title>
+    <link rel="stylesheet" href="assets/styles/css/about.css" />
+</head>
+<body>
+    <div id="main-box">
+        <h1 id="title-box">Seu ano em Pixels</h1>
+        <div id="about-box">
+            <h2 class="about-title">Sobre o software</h2>
+            <h5>Desenvolvido por:</h5>
+            <h2><a href="https://eduardojm.github.io/" class="default-browser">Eduardo Oliveira</a></h2>
+            <h5>Distribuido sobre a licença de código aberto <i>MIT</i> em:</h5>
+            <h2><a href="https://github.com/EduardoJM/year-in-pixel" class="default-browser">GitHub.com/EduardoJM/year-in-pixel</a></h2>
+            <div style="height: 100px;"></div>
+            <h5>Construido utilizando:</h5>
+            <h5>(Parte técnica, para o caso de desenvolvedores)</h5>
+            <h5 class="left">Para a aplicação:</h5>
+            <h2><a href="https://www.electronjs.org/" class="default-browser">Electron</a></h2>
+            <h5 class="left">Para a estilização:</h5>
+            <h2><a href="https://sass-lang.com/" class="default-browser">Sass</a></h2>
+            <h5 class="left">Para a padronização de códigos:</h5>
+            <h2><a href="https://github.com/typicode/husky/" class="default-browser">Husky</a></h2>
+            <h2><a href="https://eslint.org/" class="default-browser">ESLint</a></h2>
+            <h2><a href="https://github.com/okonet/lint-staged" class="default-browser">lint-staged</a></h2>
+            <h2><a href="https://github.com/conventional-changelog/commitlint" class="default-browser">commit-lint</a></h2>
+            <h2><a href="https://github.com/commitizen/cz-cli" class="default-browser">commitizen</a></h2>
+            <h5 class="left">Para o armazenamento:</h5>
+            <h2><a href="https://github.com/mapbox/node-sqlite3" class="default-browser">Sqlite3</a></h2>
+            <h5 class="left">Seletor de cores:</h5>
+            <h2><a href="https://vanilla-picker.js.org/" class="default-browser">Vanilla Picker</a></h2>
+            <h5>Dentre diversos outros softwares e tecnologias.</h5>
+        </div>
+    </div>
+
+    <!-- Right Toolbar -->
+    <div class="float-toolbar float-top float-right">
+        <div class="float-toolbar-button" id="back-button">
+            <div class="float-toolbar-button-icon">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>
+            </div>
+            <div class="float-toolbar-button-tooltip">
+                <span>Voltar para a página inicial.</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const aboutPageLoaded = require("../core/screens/about.js");
+        document.addEventListener("DOMContentLoaded", aboutPageLoaded);
+    </script>
+</body>
+</html>

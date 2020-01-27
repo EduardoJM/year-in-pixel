@@ -1,0 +1,44 @@
+@import 'utils/common';
+
+body {
+    #about-box {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        color: #222;
+        background: #EEE;
+        padding: 20px;
+
+        h2.about-title {
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h5 {
+            &:not(.left) {
+                text-align: center;
+            }
+            font-size: 1.3em;
+            font-weight: 400;
+            margin: 10px 0;
+        }
+
+        h2:not(.about-title){
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: 800;
+            
+            a {
+                color: #222;
+                text-decoration: none;
+                transition: color 0.5s;
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+    }
+}
