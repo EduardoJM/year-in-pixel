@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Seu ano em Pixels - Configurações</title>
+    <link rel="stylesheet" href="assets/styles/css/config.css" />
+</head>
+<body>
+    <div id="main-box">
+        <h1 id="title-box">Seu ano em Pixels</h1>
+        <div id="config-box">
+            <div id="config-wrapper">
+                <h3 class="config-title">Configurações</h3>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 7<br/>Incrível<br/>Dia fantástico
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="6" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 6<br/>Muito bem<br/>Dia feliz
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="5" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 5<br/>Normal<br/>Dia comum
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="4" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 4<br/>Exausto<br/>Dia cansativo
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="3" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 3<br/>Deprimido<br/>Dia triste
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="2" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 2<br/>Frustrado<br/>Dia irritante
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="1" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Cor 1<br/>Estressado<br/>Dia frenético
+                    </div>
+                    <div class="config-item-prop">
+                        <div data-prop="color-level" data-level="0" class="color-square"></div>
+                    </div>
+                </div>
+                <div class="config-item">
+                    <div class="config-item-text">
+                        Resetar aos padrões
+                    </div>
+                    <div class="config-item-prop">
+                        <a class="config-button" id="reset-config">Resetar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cp-modal" class="modal-overlay">
+        <div class="modal-overlay-shadow">
+            <div class="modal-window">
+                <div id="cp-modal-picker"></div>
+                <div class="modal-buttons">
+                    <a class="button modal-closer" data-modal="#cp-modal">Cancelar</a>
+                    <a class="button modal-ok modal-closer" data-modal="#cp-modal">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Toolbar -->
+    <div class="float-toolbar float-top float-right">
+        <div class="float-toolbar-button" id="back-button">
+            <div class="float-toolbar-button-icon">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>
+            </div>
+            <div class="float-toolbar-button-tooltip">
+                <span>Voltar para a página inicial.</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const { remote } = require('electron');
+        const Picker = require('vanilla-picker');
+        
+        const fade = require('../core/utils/vanillaFade.js');
+
+        var parent = document.querySelector('#cp-modal-picker');
+        var picker = new Picker({
+            parent: parent,
+            color: '#F00',
+            popup: false
+        });
+
+        let currentColorProp = null;
+
+        // modal show
+        const showModal = (query) => {
+            const element = document.querySelector(query);
+            if(element === null || element === undefined) {
+                return;
+            }
+            fade('in', 300, element);
+        };
+        // modal-overlay's
+        const modals = document.querySelectorAll(".modal-overlay");
+        if (modals !== null && modals !== undefined) {
+            modals.forEach((element) => {
+                const m = element;
+                m.addEventListener('click', (e) => {
+                    if(e.target === m) {
+                        fade('out', 300, m);
+                    }
+                });
+            });
+        }
+        // modal-closer
+        const closers = document.querySelectorAll(".modal-closer");
+        if(closers !== null && closers !== undefined) {
+            closers.forEach((element) => {
+                const act = element;
+                const modal = act.getAttribute('data-modal');
+                if(modal === null || modal === undefined){
+                    return;
+                }
+                act.addEventListener('click', () => {
+                    fade('out', 300, modal);
+                });
+            });
+        }
+
+        const SettingsManager = require('../core/SettingsManager.js');
+        const settings = new SettingsManager(false);
+        
+        const colorSquareClick = (e) => {
+            currentColorProp = e.target;
+            const level = parseInt(currentColorProp.getAttribute('data-level'));
+            color = settings.getColor(level);
+            console.log(color);
+            picker.setColor(color, true);
+            showModal("#cp-modal");
+        };
+        settings.addEventListener('updateColorLevels', () => {
+            for (let i = 0; i < 7; i += 1) {
+                const query = `div[data-prop="color-level"][data-level="${i}"]`;
+                const element = document.querySelector(query);
+                let color = settings.getColor(i);
+                element.style.backgroundColor = color;
+            }
+        });
+        settings.initialize();
+        for (let i = 0; i < 7; i += 1) {
+            const query = `div[data-prop="color-level"][data-level="${i}"]`;
+            const element = document.querySelector(query);
+            element.addEventListener('click', colorSquareClick);
+        }
+
+        document.querySelector("#cp-modal .modal-ok").addEventListener('click', () => {
+            if (currentColorProp === null || currentColorProp === undefined) {
+                return;
+            }
+            const level = parseInt(currentColorProp.getAttribute('data-level'));
+            console.log(level);
+            const color = picker.color.hex.substr(0, 7); // remove the alpha
+            console.log(color);
+            currentColorProp.style.backgroundColor = color;
+            
+            settings.saveColorOnDatabase(level, color);
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            const window = remote.getCurrentWindow();
+            window.loadFile('app/screens/home.html');
+        });
+        document.getElementById('reset-config').addEventListener('click', () => {
+            settings.resetDatabaseUserInfo();
+        });
+
+        //const homePageLoaded = require("../core/screens/home.js");
+        //document.addEventListener("DOMContentLoaded", homePageLoaded);
+    </script>
+</body>
+</html>

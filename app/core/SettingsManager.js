@@ -64,16 +64,29 @@ class SettingsManager {
         }
         const query = 'SELECT * FROM colors';
         this.db.all(query, (err, rows) => {
+            this.colors = this.defaults.colors;
             if (err) {
-                // console.error(err);
                 return;
             }
-            this.colors = [];
             for (let i = 0; i < rows.length; i += 1) {
                 this.colors[rows[i].id] = rows[i].color;
             }
             this.executeListener('updateColorLevels');
         });
+    }
+
+    resetDatabaseUserInfo() {
+        this.colors = [
+            '#4527a0',
+            '#ec407a',
+            '#f44336',
+            '#f57c00',
+            '#ffd740',
+            '#00c853',
+            '#0277bd',
+        ];
+        this.saveDatabaseUserInfo();
+        this.executeListener('updateColorLevels');
     }
 
     saveDatabaseUserInfo() {
@@ -92,6 +105,25 @@ class SettingsManager {
             for (let i = 0; i < this.colors.length; i += 1) {
                 stmt.run(i, this.colors[i]);
             }
+        });
+    }
+
+    saveColorOnDatabase(level, color) {
+        if (this.db === null || this.db === undefined) {
+            return;
+        }
+        const query = 'CREATE TABLE IF NOT EXISTS colors (id INT PRIMARY KEY, color CHAR[100])';
+        this.db.run(query, (err) => {
+            if (err) {
+                return;
+            }
+            if (this.colors === null || this.colors === undefined) {
+                this.colors = this.defaults.colors;
+            }
+            this.colors[level] = color;
+            const stmt = this.db.prepare('INSERT OR REPLACE INTO colors VALUES (?, ?)');
+            stmt.run(level, color);
+            this.executeListener('updateColorLevels');
         });
     }
 

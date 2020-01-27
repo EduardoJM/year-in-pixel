@@ -43,48 +43,6 @@ body #main-box h1#title-box {
   font-size: 3em;
   text-align: center;
 }
-
-body #main-box #pixels-box {
-  flex: 1;
-  overflow: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  background: #FFF;
-}
-body #main-box #pixels-box .column {
-  width: 50px;
-  display: flex;
-  flex-direction: column;
-  padding: 0 2px;
-}
-body #main-box #pixels-box .column .row {
-  height: 20px;
-  margin: 2px 0;
-}
-body #main-box #pixels-box .column .row:not(.heading) {
-  cursor: pointer;
-  background: #222;
-  padding: 2px;
-}
-body #main-box #pixels-box .column .row:not(.heading) .color {
-  width: 100%;
-  height: 100%;
-  background: #FFF;
-}
-body #main-box #pixels-box .column .row.heading {
-  background: transparent;
-  text-align: center;
-  font-weight: bold;
-}
-body #main-box #pixels-box .column.days-num .row {
-  background: #FFF;
-  text-align: center;
-  cursor: default;
-  font-weight: bold;
-}
 body .float-toolbar {
   position: fixed;
   display: flex;
@@ -133,6 +91,48 @@ body .float-toolbar.float-right {
 }
 body .float-toolbar.float-bottom {
   bottom: 10px;
+}
+
+body #main-box #pixels-box {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  background: #FFF;
+}
+body #main-box #pixels-box .column {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2px;
+}
+body #main-box #pixels-box .column .row {
+  height: 20px;
+  margin: 2px 0;
+}
+body #main-box #pixels-box .column .row:not(.heading) {
+  cursor: pointer;
+  background: #222;
+  padding: 2px;
+}
+body #main-box #pixels-box .column .row:not(.heading) .color {
+  width: 100%;
+  height: 100%;
+  background: #FFF;
+}
+body #main-box #pixels-box .column .row.heading {
+  background: transparent;
+  text-align: center;
+  font-weight: bold;
+}
+body #main-box #pixels-box .column.days-num .row {
+  background: #FFF;
+  text-align: center;
+  cursor: default;
+  font-weight: bold;
 }
 body .modal-overlay {
   position: fixed;

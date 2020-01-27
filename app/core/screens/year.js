@@ -234,6 +234,10 @@ const yearPageLoaded = () => {
         const window = remote.getCurrentWindow();
         window.loadFile('app/screens/home.html');
     });
+    document.getElementById('options-button').addEventListener('click', () => {
+        const window = remote.getCurrentWindow();
+        window.loadFile('app/screens/config.html');
+    });
 };
 
 module.exports = yearPageLoaded;
