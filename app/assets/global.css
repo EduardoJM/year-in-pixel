@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'Pacifico';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Pacifico-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Roboto-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    -webkit-user-select: none;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: #FFF;
+    color: #222;
+    font-family: 'Roboto', sans-serif;
+}
+
+#main-box {
+    width: 80%;
+    height: 90%;
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-box h1#title-box {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    font-size: 3em;
+    text-align: center;
+}
+
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: lightgrey;
+}  
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darkgrey;
+}

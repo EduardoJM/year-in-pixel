@@ -1,4 +1,11 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const {
+    app,
+    BrowserWindow,
+    Menu,
+    ipcMain,
+    shell,
+} = require('electron');
+const { registerDataEvents } = require('./core/data');
 
 let win;
 
@@ -14,10 +21,10 @@ function createWindow() {
     Menu.setApplicationMenu(null);
 
     // and load the index.html of the app.
-    win.loadFile('app/screens/home.html');
+    win.loadFile('app/pages/Config/index.html');
 
     // Open the DevTools.
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // Emitido quando a janela é fechada.
     win.on('closed', () => {
@@ -27,6 +34,25 @@ function createWindow() {
         win = null;
     });
 }
+
+registerDataEvents();
+
+ipcMain.on('navigate-to', (event, { route, query }) => {
+    if (route === '@exit') {
+        app.quit();
+        return;
+    }
+    if (route.startsWith('@external:')) {
+        const url = route.replace('@external:', '');
+        shell.openExternal(url);
+        return;
+    }
+    if (query !== null && query !== undefined) {
+        win.loadFile(route, { query });
+        return;
+    }
+    win.loadFile(route);
+});
 
 // Este método será chamado quando o Electron tiver finalizado
 // a inicialização e está pronto para criar a janela browser.
