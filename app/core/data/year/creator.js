@@ -42,18 +42,18 @@ function createMonthStates(days) {
 function createYearData(year) {
     const leap = isLeapYear(year);
     const yearData = [
-        { name: 'J', days: 31, states: createMonthStates(31) },
-        { name: 'F', days: leap ? 29 : 28, states: createMonthStates(leap ? 29 : 28) },
-        { name: 'M', days: 31, states: createMonthStates(31) },
-        { name: 'A', days: 30, states: createMonthStates(30) },
-        { name: 'M', days: 31, states: createMonthStates(31) },
-        { name: 'J', days: 30, states: createMonthStates(30) },
-        { name: 'J', days: 31, states: createMonthStates(31) },
-        { name: 'A', days: 31, states: createMonthStates(31) },
-        { name: 'S', days: 30, states: createMonthStates(30) },
-        { name: 'O', days: 31, states: createMonthStates(31) },
-        { name: 'N', days: 30, states: createMonthStates(30) },
-        { name: 'D', days: 31, states: createMonthStates(31) },
+        { name: 'january', days: 31, states: createMonthStates(31) },
+        { name: 'february', days: leap ? 29 : 28, states: createMonthStates(leap ? 29 : 28) },
+        { name: 'march', days: 31, states: createMonthStates(31) },
+        { name: 'april', days: 30, states: createMonthStates(30) },
+        { name: 'may', days: 31, states: createMonthStates(31) },
+        { name: 'june', days: 30, states: createMonthStates(30) },
+        { name: 'july', days: 31, states: createMonthStates(31) },
+        { name: 'august', days: 31, states: createMonthStates(31) },
+        { name: 'september', days: 30, states: createMonthStates(30) },
+        { name: 'october', days: 31, states: createMonthStates(31) },
+        { name: 'november', days: 30, states: createMonthStates(30) },
+        { name: 'december', days: 31, states: createMonthStates(31) },
     ];
     return yearData;
 }
