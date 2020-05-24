@@ -4,9 +4,7 @@
   "description": "",
   "main": "app/main.js",
   "scripts": {
-    "sass": "sass --watch app/screens/assets/styles/sass:app/screens/assets/styles/css",
     "start": "electron .",
-    "electron-rebuild-sqlite": "electron-rebuild -w sqlite3 -p",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
@@ -49,7 +47,6 @@
     }
   },
   "dependencies": {
-    "sqlite3": "^4.1.1",
     "vanilla-picker": "^2.10.1"
   }
 }
