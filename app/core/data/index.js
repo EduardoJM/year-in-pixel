@@ -9,6 +9,7 @@ const {
     STATE_NORMAL,
     STATE_GOOD,
     STATE_AMAZING,
+    stateTexts,
 } = require('./states');
 
 function registerDataEvents() {
@@ -26,4 +27,5 @@ module.exports = {
     STATE_NORMAL,
     STATE_GOOD,
     STATE_AMAZING,
+    stateTexts,
 };
