@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     links.forEach((item) => {
         item.addEventListener('click', () => {
             const to = item.getAttribute('to');
-            ipcRenderer.send('navigate-to', to);
+            ipcRenderer.send('navigate-to', { route: to });
         });
     });
 });
