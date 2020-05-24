@@ -100,10 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const saveYearData = () => {
-        ipcRenderer.send('save-years', yearListData);
-    };
-
     const bindLocalEvents = () => {
         document.querySelector('#selector-dialog #selector-cancel-button').addEventListener('click', () => {
             closeModalIfOpened('selector-dialog', 'flex');
@@ -133,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 currentChangingCell.style.backgroundColor = color;
                 currentChangingCell.parentElement.setAttribute('data-level', state);
-                saveYearData();
+                ipcRenderer.send('save-years', yearListData);
                 closeModalIfOpened('selector-dialog', 'flex');
             });
         });
