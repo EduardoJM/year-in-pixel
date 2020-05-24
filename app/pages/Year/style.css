@@ -1,0 +1,64 @@
+
+#main-box #pixels-box {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background: #FFF;
+}
+
+#main-box #pixels-box .column {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2px;
+}
+
+#main-box #pixels-box .column .row {
+    height: 20px;
+    margin: 2px 0;
+}
+
+#main-box #pixels-box .column .row:not(.heading) {
+    cursor: pointer;
+    background: #222;
+    padding: 2px;
+}
+
+#main-box #pixels-box .column .row:not(.heading) .color {
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+}
+
+#main-box #pixels-box .column .row.heading {
+    background: transparent;
+    text-align: center;
+    font-weight: bold;
+}
+
+#main-box #pixels-box .column.days-num .row {
+    background: #FFF;
+    text-align: center;
+    cursor: default;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: lightgrey;
+}  
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darkgrey;
+}
