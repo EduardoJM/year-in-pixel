@@ -1,24 +1,3 @@
 #main-box #commands-box {
     flex: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-top: 30px;
-}
-
-#commands-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-        
-#commands-list .command {
-    padding: 15px 10px;
-    margin: 5px 0;
-    text-align: center;
-    font-size: 1.3em;
-}
-
-#commands-list .command:hover {
-    background: #DDD;
-    cursor: pointer;
 }

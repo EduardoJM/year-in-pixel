@@ -50,6 +50,29 @@ body
     text-align: center;
 }
 
+#commands-box {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+#commands-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+        
+#commands-list .command {
+    padding: 15px 10px;
+    margin: 5px 0;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+#commands-list .command:hover {
+    background: #DDD;
+    cursor: pointer;
+}
 
 ::-webkit-scrollbar {
     width: 20px;
