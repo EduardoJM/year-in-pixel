@@ -1,0 +1,96 @@
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    display: none;
+}
+
+.modal-overlay .modal-box {
+    width: 70%;
+    height: 70%;
+    background: #FFF;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay .modal-box .modal-title-box h1 {
+    font-family: 'Pacifico', cursive;
+    font-weight: 100;
+    text-align: center;
+}
+
+.modal-overlay .modal-box .modal-content-box{
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal-overlay .modal-box .modal-content-box
+.list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+
+.modal-overlay .modal-box .modal-content-box
+.list
+.list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: start;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.modal-overlay .modal-box .modal-content-box
+.list
+.list-item:hover {
+    border-color: #222;
+    cursor: pointer;
+}
+
+.modal-overlay .modal-box .modal-content-box
+.list
+.list-item
+.list-item-color {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.modal-overlay .modal-box .modal-content-box
+.list
+.list-item
+.list-item-text {
+    flex: 1;
+}
+
+.modal-overlay .modal-box .modal-footer-box {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay .modal-box .modal-footer-box .button {
+    cursor: pointer;
+    background: #CCC;
+    padding: 10px 15px;
+}
+
+.modal-overlay .modal-box .modal-footer-box .button:hover {
+    background: #BBB;
+}
