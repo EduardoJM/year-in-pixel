@@ -11,7 +11,7 @@ const {
 
 const AppDefaultConfiguration = {
     colors: {
-        [STATE_UNSET]: 'transparent',
+        [STATE_UNSET]: '#FFFFFF',
         [STATE_STRESSED]: '#4527a0',
         [STATE_FRUSTRATED]: '#ec407a',
         [STATE_DEPRESSED]: '#f44336',
