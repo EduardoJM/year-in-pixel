@@ -16,9 +16,20 @@
     margin: 5px 0;
     text-align: center;
     font-size: 1.3em;
+    position: relative;
 }
 
 #years-list .year:hover {
     background: #DDD;
     cursor: pointer;
+}
+
+#years-list .year span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    padding: 5px;
+    font-size: 13px;
 }
