@@ -33,3 +33,30 @@
     padding: 5px;
     font-size: 13px;
 }
+
+#year-titlte-dialog .modal-box {
+    max-height: 70%;
+    height: auto;
+}
+
+#year-titlte-dialog .modal-content-box {
+    padding: 20px;
+}
+
+#year-titlte-dialog .field {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#year-titlte-dialog .field input[type=text] {
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    padding: 6px 18px;
+    margin-top: 10px;
+}
+
+#year-titlte-dialog .button {
+    margin: 0 10px;
+}
