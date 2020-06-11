@@ -58,6 +58,11 @@ function createYearData(year) {
     return yearData;
 }
 
+/**
+ * Create complete year information for a new year.
+ * @param {string} text - the display title of the year.
+ * @param {number} year - the year to create data.
+ */
 function createYear(text, year) {
     const data = {
         text,

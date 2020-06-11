@@ -9,6 +9,9 @@ const {
     STATE_AMAZING,
 } = require('../states');
 
+/**
+ * The default App configuration object.
+ */
 const AppDefaultConfiguration = {
     colors: {
         [STATE_UNSET]: '#FFFFFF',

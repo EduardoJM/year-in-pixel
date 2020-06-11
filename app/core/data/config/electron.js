@@ -2,6 +2,9 @@ const { ipcMain } = require('electron');
 
 const { loadConfig, saveConfig } = require('./io');
 
+/**
+ * Register the electron-side configuration events.
+ */
 function registerConfigurationEvents() {
     ipcMain.on('load-config', (event) => {
         const cfg = loadConfig();

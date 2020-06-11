@@ -12,6 +12,9 @@ const {
     stateTexts,
 } = require('./states');
 
+/**
+ * Register the electron-side data events.
+ */
 function registerDataEvents() {
     registerConfigurationEvents();
     registerYearEvents();

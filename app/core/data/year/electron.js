@@ -2,6 +2,9 @@ const { ipcMain } = require('electron');
 const { createYear } = require('./creator');
 const { loadYears, saveYears } = require('./io');
 
+/**
+ * Register the electron-side year configuration events.
+ */
 function registerYearEvents() {
     ipcMain.on('load-years', (event) => {
         const cfg = loadYears();
