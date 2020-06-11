@@ -1,3 +1,8 @@
+/**
+ * Toggle an mmodal between the 'opened' or 'closed' state.
+ * @param {string} id - the element id.
+ * @param {string} display - the display ('flex' or 'block')
+ */
 const toggleModal = (id, display) => {
     const dlg = document.getElementById(id);
     if (dlg.dataset.dialogOpening === true || dlg.dataset.dialogClosing === true) {
@@ -39,6 +44,11 @@ const toggleModal = (id, display) => {
     setTimeout(changeOpacity, interval);
 };
 
+/**
+ * Check if an modal is open and if it's open, close it.
+ * @param {string} id - the element id.
+ * @param {string} display - the display ('flex' or 'block')
+ */
 const closeModalIfOpened = (id, display) => {
     const dlg = document.getElementById(id);
     if (dlg.dataset.dialogOpening === true || dlg.dataset.dialogClosing === true) {
