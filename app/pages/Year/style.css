@@ -46,3 +46,10 @@
     cursor: default;
     font-weight: bold;
 }
+
+#commands-list {
+    flex-direction: row;
+}
+#commands-list .command.link {
+    flex: 1;
+}

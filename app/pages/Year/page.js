@@ -135,9 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const deleteYear = () => {
+        yearListData = yearListData.filter((year) => year !== yearData);
+        ipcRenderer.send('save-years', yearListData);
+        ipcRenderer.send('navigate-to', { route: 'app/pages/Home/index.html' });
+    };
+    document.getElementById('delete-button').addEventListener('click', deleteYear);
+
     ipcRenderer.on('years-loaded', (event, arg) => {
         if (yearIndex >= arg.length) {
-            ipcRenderer.send('navigate-to', 'app/pages/Home/index.html');
+            ipcRenderer.send('navigate-to', { route: 'app/pages/Home/index.html' });
             return;
         }
         yearListData = arg;
